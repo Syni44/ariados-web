@@ -12,14 +12,13 @@ config :ariados,
 
 # Configures the endpoint
 config :ariados, AriadosWeb.Endpoint,
-  url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
+  url: [host: "localhost"],
   render_errors: [
     formats: [html: AriadosWeb.ErrorHTML, json: AriadosWeb.ErrorJSON],
     layout: false
   ],
   pubsub_server: Ariados.PubSub,
-  live_view: [signing_salt: "39+1lPQu"],
-  server: true
+  live_view: [signing_salt: "39+1lPQu"]
 
 # Configures the mailer
 #
