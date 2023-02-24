@@ -21,8 +21,9 @@ config :logger, level: :info
 # of environment variables, is done on config/runtime.exs.
 
 config :ariados, AriadosWeb.Endpoint,
+  check_origin: ["//*.gigalixirapp.com", "//*.gigalixirapp.com:*", "localhost"],
   http: [port: {:system, "PORT"}], # Possibly not needed, but doesn't hurt
-  url: [host: "ariados-web.gigalixirapp.com", port: 443],
+  url: [host: "//ariados-web.gigalixirapp.com"],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
   server: true
 

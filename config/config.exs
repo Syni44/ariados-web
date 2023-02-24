@@ -12,7 +12,7 @@ config :ariados,
 
 # Configures the endpoint
 config :ariados, AriadosWeb.Endpoint,
-  url: [host: "ariados-web.gigalixirapp.com", port: 443],
+  url: [host: "//ariados-web.gigalixirapp.com"],
   render_errors: [
     formats: [html: AriadosWeb.ErrorHTML, json: AriadosWeb.ErrorJSON],
     layout: false
