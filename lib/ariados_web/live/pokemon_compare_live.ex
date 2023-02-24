@@ -16,7 +16,7 @@ defmodule AriadosWeb.PokemonCompareLive do
 
     <div style="display: flex; flex-direction: row; align-items: flex-start;">
       <.form :let={f} for={:search_form} phx-submit="send_query" style="width: 100%; display: inline-flex; justify-content: center; flex-direction: row;">
-        <.input field={{f, :new_query}} style="width: 600px; margin-right: 5px;" />
+        <.input field={{f, :new_query}} style="width: 50vw; margin-right: 5px;" />
         <.button style="background: #4a5069; margin-top: 8px; margin-bottom: 1px;">Search</.button>
       </.form>
     </div>
