@@ -3,16 +3,19 @@ defmodule AriadosWeb.PokemonCompareLive do
 
   def mount(_params, _session, socket) do
     {_, pkmn} = RareCandy.Api.find_pokemon("ariados")
-    {:ok, assign(socket, name: pkmn.name, img: pkmn.img, error_message: "")}
+    {:ok, assign(socket, name: pkmn.name, img: pkmn.img, types: pkmn.types, error_message: "")}
   end
 
   def render(assigns) do
     ~H"""
-    <center>Hey, that's <strong><%= @name |> String.capitalize() %>!</strong></center>
+    <center>Hey, that's <strong><%= @name |> String.capitalize() %>!</strong>
 
-    <hr/>
-    <hr/>
-    <hr/>
+    <div style="width: 60vw;">
+      <hr/>
+      <hr/>
+      <hr/>
+    </div>
+    </center>
 
     <div style="display: flex; flex-direction: row; align-items: flex-start;">
       <.form :let={f} for={:search_form} phx-submit="send_query" style="width: 100%; display: inline-flex; justify-content: center; flex-direction: row;">
@@ -23,6 +26,15 @@ defmodule AriadosWeb.PokemonCompareLive do
 
     <center>
       <img src={@img}>
+      <div style="display: flex; flex-direction: row; justify-content: center;">
+        <%= for item <- @types do %>
+          <h1 style="background-color: #ccc; border-radius: 4px; margin-left: 7px;
+          margin-right: 7px; padding-left: 5px; padding-right: 5px;
+          font-size: 22px;">
+            <span><%= String.capitalize(item) %></span>
+          </h1>
+        <% end %>
+      </div>
     </center>
 
     <h2 style="color: #ff0000;"><%= @error_message %></h2>
@@ -33,10 +45,10 @@ defmodule AriadosWeb.PokemonCompareLive do
     {s, pkmn} = RareCandy.Api.find_pokemon(query)
     case s do
       :ok ->
-        {:noreply, assign(socket, name: pkmn.name, img: pkmn.img, error_message: "")}
+        {:noreply, assign(socket, name: pkmn.name, img: pkmn.img, types: pkmn.types, error_message: "")}
       _ ->
         err = "An error has occurred -- Could not find #{query}!"
-        {:noreply, assign(socket, name: "", img: "", error_message: err)}
+        {:noreply, assign(socket, name: "", img: "", types: [], error_message: err)}
     end
   end
 end
